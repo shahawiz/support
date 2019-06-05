@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Phone Check</title>
+    <link rel="stylesheet" href="https://intl-tel-input.com/node_modules/intl-tel-input/examples/css/prism.css">
+    <link rel="stylesheet" href="https://intl-tel-input.com/node_modules/intl-tel-input/build/css/intlTelInput.css?1549804213570">
+    <link rel="stylesheet" href="https://intl-tel-input.com/node_modules/intl-tel-input/build/css/demo.css?1549804213570">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+</head>
+<body>
+    <input id="phone" type="tel">
+
+</body>
+<script>
+var input = document.querySelector("#phone");
+intlTelInput(input, {
+  initialCountry: "auto",
+  geoIpLookup: function(callback) {
+    $.get('https://ipinfo.io', function() {}, "jsonp").always(function(resp) {
+      var countryCode = (resp && resp.country) ? resp.country : "";
+      callback(countryCode);
+    });
+  },
+  utilsScript: "../../build/js/utils.js?1549804213570" // just for formatting/placeholders etc
+});
+</script>
+</html>
