@@ -157,3 +157,43 @@ a:hover{
   .card-header .collapsed .fa {
     transform: rotate(-90deg);
   }
+  .bg-light:hover {
+    background-color: #ffffff!important;
+}
+.btn.focus, .btn:focus {
+    box-shadow: none !important;
+}
+.btn{
+    color:#ffffff !important;
+}
+/* Tickets Status */
+.status{
+    color: white;
+    border-radius: 5px;
+    padding: 4px;
+    font-weight: bold;
+    width: 85%;
+    text-align: center;
+}
+.status-solved{
+    background: green;
+}
+.status-answered{
+    background: #3490dc;
+}
+.status-pending{
+    background: #e4ac04;
+}
+.status-closed{
+    background: #dc3545;
+}
+.admin-dash{
+    font-weight: bold;
+    color: #e3342f !important;
+}
+.dropdown-item.active, .dropdown-item:active {
+    background-color: #e9ecef !important;
+}
+.dash-search{
+    background: #f7f7f7 !important;
+}

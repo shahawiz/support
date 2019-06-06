@@ -25,6 +25,9 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        //
+        //Admin Panel Gate
+        Gate::define('admin-dash',function ($user){
+            return $user->user_role== 2 || $user->user_role==3;
+        });
     }
 }

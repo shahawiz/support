@@ -48,16 +48,16 @@
                                 <td>
                                     @switch($ticket->status)
                                     @case('Pending')
-                                        <strong style="color:grey">Pending
+                                        <div class="status status-pending" >Pending
                                         @break
                                     @case('Answered')
-                                         <strong style="color:midnightblue">Answered
+                                         <div class="status status-answered">Answered
                                         @break
                                     @case('Solved')
-                                       <strong style="color:green">Solved
+                                       <div class="status status-solved" >Solved
                                         @break
                                 @endswitch
-                            </strong>
+                            </div>
                                 </td>
                                 <td>
                                     {{$ticket->department->title}}

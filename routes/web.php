@@ -51,5 +51,12 @@ Route::get('/kcenter/{topic?}','KcenterController@singleTopic');
 Route::get('/api/notifications/all','UserController@all_notifications')->name('api_AllNotif');
 Route::get('/user/notifications/read/{notifId?}/{ticketId?}','UserController@read_notification')->name('read_notification');
 
-#Admin Dashboard
-Route::get('/admin','admin\HomeController@Home')->name('admin');
+ #Admin Dashboard
+Route::group(['middleware' => ['auth','CheckAdmin']], function () {
+Route::get('/admin','admin\AdminController@Home')->name('admin');
+Route::get('/admin/settings','admin\AdminController@siteSettings')->name('site_settings');
+Route::get('/admin/users','admin\AdminController@usersList')->name('admin_users');
+Route::get('/admin/staff','admin\AdminController@staffList')->name('admin_staff');
+Route::get('/admin/departments','admin\AdminController@departmentsList')->name('admin_departments');
+
+});
