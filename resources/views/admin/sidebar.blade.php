@@ -11,7 +11,7 @@
         <div id="collapse-admin" class="collapse " aria-labelledby="heading-example">
 
             <div class="card-body">
-                <li class="li-admin"><a href="#"><span class="fa fa-home"></span> Home </a></li>
+                <li class="li-admin"><a href="{{route('admin')}}"><span class="fa fa-home"></span> Home </a></li>
                 <hr>
             <li class="li-admin"><a href="{{route('site_settings')}}"><span class="fa fa-cogs"></span> Site Settings </a></li>
                 <hr>

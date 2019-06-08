@@ -197,3 +197,36 @@ a:hover{
 .dash-search{
     background: #f7f7f7 !important;
 }
+
+/* Footer section */
+.footer-social {
+    margin-left: auto;
+    margin-top: 8px;
+}
+
+.footer-social__list-item {
+    display: inline-block;
+    margin-left: 16px;
+}
+.footer__icon-link {
+    display: inline-block;
+    -webkit-transition: 0.1s cubic-bezier(0.39, 0.575, 0.565, 1);
+    transition: 0.1s cubic-bezier(0.39, 0.575, 0.565, 1);
+    -webkit-transition-property: opacity, -webkit-transform;
+    transition-property: opacity, -webkit-transform;
+    transition-property: opacity, transform;
+    transition-property: opacity, transform, -webkit-transform;
+}
+.footer-social__icon {
+    display: inline-block;
+    height: 32px;
+    width: 32px;
+}
+.footer-social__icon:hover {
+    display: inline-block;
+    height: 32px;
+    width: 32px;
+    border: 1px solid #e2e2e2;
+    padding: 2px;
+    transition : .2s;
+}

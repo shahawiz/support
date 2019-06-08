@@ -85,7 +85,7 @@
 
                             <div class="col-md-6">
                                 <input id="phone" type="tel" class="form-control{{ $errors->has('phone') ? ' is-invalid' : '' }}" name="phone" value="{{ old('phone') }}" required autofocus>
-                                <small>i.e. +1 541 754 3010</small>
+                                <small>e.g. +1 541 754 3010</small>
                                 @if ($errors->has('phone'))
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $errors->first('phone') }}</strong>

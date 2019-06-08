@@ -7,7 +7,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name', 'Laravel') }} - @yield('title','')</title>
 
     <!-- Scripts -->
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
@@ -36,7 +36,7 @@
         <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
             <div class="container">
                 <a  href="/" class="navbar-brand" style="font-size: large; font-weight: bold;">
-                    <img src="{{asset ('/images/logo.png')}}" width="48px"/>  Support Tickets</a>
+                    <img src="{{asset ('/images/logo.png')}}" width="48px"/>  Help Desk</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -116,7 +116,25 @@
         <main class="py-4">
             @yield('content')
         </main>
+
     </div>
+    <div class="footer-social text-center mt-5">
+        <ul>
+            <li class="footer-social__list-item">
+                <a rel="nofollow" href="https://www.in.com/"><i class="fa fa-2x fa-facebook"></i></a>
+              </li>
+            <li class="footer-social__list-item">
+                <a rel="nofollow" href="https://www.in.com/"><i class="fa fa-2x fa-twitter"></i></a>
+            </li>
+            <li class="footer-social__list-item">
+              <a rel="nofollow" href="https://www.in.com/"><i class="fa fa-2x fa-linkedin"></i></a>
+            </li>
+            <br><br><span class="text-center">&copy; {{ date('Y') }} {{ config('app.name') }}. All copyrights reserved.</span>
+
+        </ul>
+
+      </div>
+
     <audio id="notifiy_sound" >
     <source src="{{asset('assets/new.mp3')}}" type="audio/mpeg" >
       </audio>

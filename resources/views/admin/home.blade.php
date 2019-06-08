@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title','Home Page')
+@section('title','Admin Panel')
 
 @section('content')
 <div class="container">

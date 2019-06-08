@@ -56,7 +56,14 @@ Route::group(['middleware' => ['auth','CheckAdmin']], function () {
 Route::get('/admin','admin\AdminController@Home')->name('admin');
 Route::get('/admin/settings','admin\AdminController@siteSettings')->name('site_settings');
 Route::get('/admin/users','admin\AdminController@usersList')->name('admin_users');
+Route::get('/admin/users/add','admin\AdminController@createUser')->name('admin_createUser');
+Route::post('/admin/users/add','admin\AdminController@commitCreateUser')->name('admin_createUser');
 Route::get('/admin/staff','admin\AdminController@staffList')->name('admin_staff');
 Route::get('/admin/departments','admin\AdminController@departmentsList')->name('admin_departments');
+Route::post('/admin/departments','admin\AdminController@commitCreateDepartment')->name('admin_createDepartment');
+Route::delete('/admin/departments/{id?}','admin\AdminController@deleteDepartment')->name('admin_deleteDepartment');
+Route::get('/admin/departments/{id?}','admin\AdminController@viewDepartment')->name('admin_viewDepartment');
+Route::put('/admin/departments/{id?}','admin\AdminController@updateDepartment')->name('admin_updateDepartment');
+
 
 });

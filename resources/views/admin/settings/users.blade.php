@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title','Home Page')
+@section('title','Admin | Users')
 
 @section('content')
 <div class="container">
@@ -12,7 +12,7 @@
         <div class="col-md-9">
             <div class="card">
                 <div class="card-header">Dashboard <i class="fa fa-chevron-right"></i> {{$pageName}}s
-                    <div class="float-right"> <a class="btn btn-dark"><i class="fa fa-plus"></i> Add {{$pageName}}</a></div>
+                <div class="float-right"> <a href="{{route('admin_createUser')}}" class="btn btn-dark"><i class="fa fa-plus"></i> Add {{$pageName}}</a></div>
 
                 </div>
 
@@ -28,6 +28,17 @@
                             <div class="row">
 
                                 <div class="col-md-12">
+
+                                        @if ($usersList->isEmpty())
+                                        <div class="empty text-center" >
+                                            <i style="color:#80808045;" class="far fa-smile-beam fa-7x"></i>
+                                            <br>
+                                            <br>
+                                        <h5>There is no users there.<br><small>You can Add new user or any guest who register will appear there.</small> </h5>
+                                        </div>
+
+
+                                    @else
                                         <input class="form-control dash-search" id="myInput" type="text" placeholder="Search..">
 
                                     <br>
@@ -51,16 +62,16 @@
                                                     </td>
                                                     <td><small>{{$user->created_at}}</small></td>
                                                     <td>
-                                                         <a href="" class="btn btn-info"><i class="fa fa-pencil"></i></a>
-                                                         <a href="" class="btn btn-dark"><i class="fa fa-hand-stop-o"></i></a>
-                                                         <a href="" class="btn btn-danger"><i class="fa fa-trash"></i></a>
+                                                         <a href="" title="Edit" class="btn btn-info"><i class="fa fa-pencil"></i></a>
+                                                         <a href="" title="Suspend" class="btn btn-dark"><i class="fa fa-hand-stop-o"></i></a>
+                                                         <a href="" title="Delete" class="btn btn-danger"><i class="fa fa-trash"></i></a>
                                                     </td>
                                                   </tr>
                                             @endforeach
 
                                         </tbody>
                                       </table>
-
+                                      @endif
                                       <script>
                                         $(document).ready(function(){
                                         $("#myInput").on("keyup", function() {
