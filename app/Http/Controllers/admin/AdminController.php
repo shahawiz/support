@@ -31,21 +31,23 @@ class AdminController extends Controller
         return view('admin.settings/site');
     }
 
-    //Get Full Users List
+
+
+    //*Get Full Users List
     public function usersList(){
         $usersList = User::where('user_role',1)->get();
         $pageName = 'User';
         return view('admin.settings/users',compact('usersList','pageName'));
     }
 
-    //Get Full Users List
+    //*Get Full Users List
     public function staffList(){
         $staffList = User::where('user_role',2)->get();
         $pageName = 'Staff';
         return view('admin.settings/staff',compact('staffList','pageName'));
     }
 
-    //Get Full Departments List
+    //?Get Full Departments List
     public function departmentsList(){
         $departmentsList = Department::all();
         $pageName = 'Department';

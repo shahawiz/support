@@ -1,6 +1,8 @@
 @extends('layouts.app')
-@section('title', 'View All Tickets')
+@section('title', 'View All '.$pageName.' Tickets')
 @section('content')
+
+
     <div class="container col-md-10 col-md-offset-2 mt-5">
         <div class="card">
             <div class="card-header ">

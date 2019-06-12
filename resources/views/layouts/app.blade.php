@@ -21,13 +21,19 @@
 
     <!-- Styles -->
     <link rel="stylesheet" href="{{asset('css/style.css')}}">
+    <link rel="stylesheet" href="{{asset('css/switcher.css')}}">
     <link rel="stylesheet" href="{{asset('assets/phone/css/intlTelInput.css')}}">
 
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <!-- Dark Mode -->
+    {{-- <link href="https://bootstrap.themes.guide/darkster/theme.min.css" rel="stylesheet"> --}}
+    {{-- <link href="https://stackpath.bootstrapcdn.com/bootswatch/4.3.1/darkly/bootstrap.min.css" rel="stylesheet" integrity="sha384-w+8Gqjk9Cuo6XH9HKHG5t5I1VR4YBNdPt/29vwgfZR485eoEJZ8rJRbm3TR32P6k" crossorigin="anonymous"> --}}
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
+
 
 
 </head>
@@ -105,6 +111,17 @@
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                         @csrf
                                     </form>
+                                    <hr/>
+                                    <div class="darkmode text-center" style="display:inline-flex;">
+
+                                        <a class="mr-4 ml-4">Dark Mode</a>
+                                    <div class="form-switcher form-switches-sm form-switcher-sm-phone float-right">
+                                        <input type="checkbox" name="switcher-lg" id="switcher-lg">
+                                        <label class="switcher" for="switcher-lg"><i class="fas fa-moon" style="color:white"></i>&nbsp;<i class="fas fa-sun" style="color:gray"></i></label>
+                                      </div>
+
+                                </div>
+
                                 </div>
                             </li>
                         @endguest
@@ -118,7 +135,7 @@
         </main>
 
     </div>
-    <div class="footer-social text-center mt-5">
+    <div class="footer-social text-center mt-5 footer">
         <ul>
             <li class="footer-social__list-item">
                 <a rel="nofollow" href="https://www.in.com/"><i class="fa fa-2x fa-facebook"></i></a>

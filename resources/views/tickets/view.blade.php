@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 
-<title>View Ticket #{{ $ticket->id }}</title>
+@section('title','View Ticket #'.$ticket->id)
 @section('content')
 <link rel="stylesheet" href="{{asset('css/viewTicket-style.css')}}">
 

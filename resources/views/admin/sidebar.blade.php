@@ -8,7 +8,7 @@
                 Administration Menu
             </a>
         </div>
-        <div id="collapse-admin" class="collapse " aria-labelledby="heading-example">
+        <div id="collapse-admin" class="collapse show" aria-labelledby="heading-example">
 
             <div class="card-body">
                 <li class="li-admin"><a href="{{route('admin')}}"><span class="fa fa-home"></span> Home </a></li>
@@ -37,13 +37,13 @@
         <div id="collapse-tickets" class="collapse show" aria-labelledby="heading-example">
 
             <div class="card-body">
-                <li class="li-admin"><a href="#"><span class="fas fa-list"></span> All Tickets </a></li>
+            <li class="li-admin"><a href="{{route('admin_all_tickets')}}"><span class="fas fa-list"></span> All Tickets </a></li>
                 <hr>
-                <li class="li-admin"><a href="#"><span class="fa fa-history"></span> Pending Tickets </a></li>
+                <li class="li-admin"><a href="{{route('admin_pending_tickets')}}"><span class="fa fa-history"></span> Pending Tickets </a></li>
                 <hr>
-                <li class="li-admin"><a href="#"><span class="fa fa-check"></span> Answered Tickets </a></li>
+                <li class="li-admin"><a href="{{route('admin_answered_tickets')}}"><span class="fa fa-check"></span> Answered Tickets </a></li>
                 <hr>
-                <li class="li-admin"><a href="#"><span class="fa fa-check-circle"></span> Sovled Tickets </a>
+                <li class="li-admin"><a href="{{route('admin_solved_tickets')}}"><span class="fa fa-check-circle"></span> Sovled Tickets </a>
                 </li>
             </div>
         </div>

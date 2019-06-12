@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-#Tickets Section
+//! Tickets Section
 Route::get('/','PagesController@index');
 Route::get('/tickets/all','TicketsController@index')->name('all_tickets');
 Route::get('/tickets/pending','TicketsController@pendingTicketsList')->name('pending_tickets');
@@ -30,7 +30,7 @@ Route::post('/comment','CommentsController@createComment');
 
 Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
-#user Notifications
+//! User Notifications
 Route::get('/user/notifications','UserController@notifications')->name('all_notifications');
 
 Route::get('/user/profile','UserController@edit')->name('profile');
@@ -38,20 +38,20 @@ Route::post('/user/profile','UserController@update')->name('profile');
 route::get('/user/avatar','UserController@viewAvatar')->name('change_avatar');
 route::post('/user/avatar','UserController@updateAvatar')->name('update_avatar');
 
-#Contact Us
+//! Contact Us
 Route::get('/contactus','ContactusController@index')->name('contactus');
-#Downloads Center
+//! Downloads Center
 Route::get('/downloads','DownloadsController@index')->name('downloads');
 Route::get('/downloads/{file?}','DownloadsController@singleFile');
-#Knowledge Center
+//! Knowledge Center
 Route::get('/kcenter','KcenterController@index')->name('kcenter');
 Route::get('/kcenter/{topic?}','KcenterController@singleTopic');
 
-#APIs
+//!APIs
 Route::get('/api/notifications/all','UserController@all_notifications')->name('api_AllNotif');
 Route::get('/user/notifications/read/{notifId?}/{ticketId?}','UserController@read_notification')->name('read_notification');
 
- #Admin Dashboard
+ //! Admin Dashboard
 Route::group(['middleware' => ['auth','CheckAdmin']], function () {
 Route::get('/admin','admin\AdminController@Home')->name('admin');
 Route::get('/admin/settings','admin\AdminController@siteSettings')->name('site_settings');
@@ -64,6 +64,10 @@ Route::post('/admin/departments','admin\AdminController@commitCreateDepartment')
 Route::delete('/admin/departments/{id?}','admin\AdminController@deleteDepartment')->name('admin_deleteDepartment');
 Route::get('/admin/departments/{id?}','admin\AdminController@viewDepartment')->name('admin_viewDepartment');
 Route::put('/admin/departments/{id?}','admin\AdminController@updateDepartment')->name('admin_updateDepartment');
-
+//! Tickets Section
+Route::get('/admin/tickets/all','admin\TicketsController@index')->name('admin_all_tickets');
+Route::get('/admin/tickets/pending','admin\TicketsController@pendingTicketsList')->name('admin_pending_tickets');
+Route::get('/admin/tickets/answered','admin\TicketsController@answeredTicketsList')->name('admin_answered_tickets');
+Route::get('/admin/tickets/solved','admin\TicketsController@solvedTicketsList')->name('admin_solved_tickets');
 
 });

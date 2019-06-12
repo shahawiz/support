@@ -18,21 +18,23 @@ class TicketsController extends Controller
     public function index()
     {
         $tickets = Ticket::where('user_id',Auth::user()->id)->latest('id')->get();
-
-
-        return view('tickets.home',compact('tickets'));
+        $pageName = '';
+        return view('tickets.home',compact('tickets','pageName'));
     }
     public function pendingTicketsList(){
         $tickets = Ticket::where('user_id',Auth::user()->id)->where('status','Pending')->latest('id')->get();
-        return view('tickets.home',compact('tickets'));
+        $pageName = 'pending';
+        return view('tickets.home',compact('tickets','pageName'));
     }
     public function answeredTicketsList(){
         $tickets = Ticket::where('user_id',Auth::user()->id)->where('status','Answered')->latest('id')->get();
-        return view('tickets.home',compact('tickets'));
+        $pageName = 'answered';
+        return view('tickets.home',compact('tickets','pageName'));
     }
     public function solvedTicketsList(){
         $tickets = Ticket::where('user_id',Auth::user()->id)->where('status','Solved')->latest('id')->get();
-        return view('tickets.home',compact('tickets'));
+        $pageName = 'solved';
+        return view('tickets.home',compact('tickets','pageName'));
     }
 
     /**
