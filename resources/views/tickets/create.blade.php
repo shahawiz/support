@@ -68,10 +68,18 @@
 
         <script>
                 $('#summernote').summernote({
+
                   placeholder: 'Feel free to ask us any question',
                   tabsize: 2,
-                  height: 300
+                  height: 300,
+                  toolbar: [
+                    ['font', ['bold', 'underline']],
+                    ['color', ['color']],
+                    ['insert', ['link', 'picture', 'video']],
+                    ['view', ['fullscreen', 'help']],
+                ],
                 });
+
               </script>
     </div>
 @endsection

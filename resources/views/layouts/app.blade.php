@@ -21,14 +21,11 @@
 
     <!-- Styles -->
     <link rel="stylesheet" href="{{asset('css/style.css')}}">
-    <link rel="stylesheet" href="{{asset('css/switcher.css')}}">
     <link rel="stylesheet" href="{{asset('assets/phone/css/intlTelInput.css')}}">
 
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <!-- Dark Mode -->
-    {{-- <link href="https://bootstrap.themes.guide/darkster/theme.min.css" rel="stylesheet"> --}}
-    {{-- <link href="https://stackpath.bootstrapcdn.com/bootswatch/4.3.1/darkly/bootstrap.min.css" rel="stylesheet" integrity="sha384-w+8Gqjk9Cuo6XH9HKHG5t5I1VR4YBNdPt/29vwgfZR485eoEJZ8rJRbm3TR32P6k" crossorigin="anonymous"> --}}
+
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
@@ -42,7 +39,7 @@
         <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
             <div class="container">
                 <a  href="/" class="navbar-brand" style="font-size: large; font-weight: bold;">
-                    <img src="{{asset ('/images/logo.png')}}" width="48px"/>  Help Desk</a>
+                <img src="{{asset ('/images/logo.png')}}" width="48px"/>  Support</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -67,7 +64,7 @@
                          @endif
                         <li><a href="{{route('downloads')}}">Downloads</a></li>
                         <li><a href="{{route('kcenter')}}">Knowledge Center</a></li>
-                        <li><a href="{{route('contactus')}}">Contact Us</a></li>
+                        <li><a href="">Contact Us</a></li>
 
 
                     </ul>
@@ -84,7 +81,6 @@
                                 </li>
                             @endif
                         @else
-                        @include('tickets.notifications')
 
                             <li class="nav-item dropdown">
 
@@ -95,10 +91,7 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    @if(Auth::user()->can('admin-dash'))
-                                    <a class="dropdown-item admin-dash" href="{{route('admin')}}"><i class="fa fa-bookmark"></i>&nbsp; Admin Dashboard</a>
-                                    <hr>
-                                    @endif
+
                                     <a class="dropdown-item" href="{{route('profile')}}"><i class="fa fa-user "></i>&nbsp; My Profile</a>
 
                                     <a class="dropdown-item" href="{{ route('logout') }}"
@@ -111,16 +104,8 @@
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                         @csrf
                                     </form>
-                                    <hr/>
-                                    <div class="darkmode text-center" style="display:inline-flex;">
 
-                                        <a class="mr-4 ml-4">Dark Mode</a>
-                                    <div class="form-switcher form-switches-sm form-switcher-sm-phone float-right">
-                                        <input type="checkbox" name="switcher-lg" id="switcher-lg">
-                                        <label class="switcher" for="switcher-lg"><i class="fas fa-moon" style="color:white"></i>&nbsp;<i class="fas fa-sun" style="color:gray"></i></label>
-                                      </div>
 
-                                </div>
 
                                 </div>
                             </li>
@@ -135,27 +120,5 @@
         </main>
 
     </div>
-    <div class="footer-social text-center mt-5 footer">
-        <ul>
-            <li class="footer-social__list-item">
-                <a rel="nofollow" href="https://www.in.com/"><i class="fa fa-2x fa-facebook"></i></a>
-              </li>
-            <li class="footer-social__list-item">
-                <a rel="nofollow" href="https://www.in.com/"><i class="fa fa-2x fa-twitter"></i></a>
-            </li>
-            <li class="footer-social__list-item">
-              <a rel="nofollow" href="https://www.in.com/"><i class="fa fa-2x fa-linkedin"></i></a>
-            </li>
-            <br><br><span class="text-center">&copy; {{ date('Y') }} {{ config('app.name') }}. All copyrights reserved.</span>
-
-        </ul>
-
-      </div>
-
-    <audio id="notifiy_sound" >
-    <source src="{{asset('assets/new.mp3')}}" type="audio/mpeg" >
-      </audio>
-
-<script defer src="{{asset('js/notifiy.js')}}"></script>
 </body>
 </html>

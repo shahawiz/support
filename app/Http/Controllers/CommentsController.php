@@ -12,14 +12,19 @@ class CommentsController extends Controller
 {
     public function createComment( CommentFormRequest $request ){
 
+        //! Repalce <p></p> with <br> in ticket content
+        $userContent = $request->get('content');
+        $contentStep = str_replace('<p>','<br/>',$userContent);
+        $content = str_replace('</p>','',$contentStep);
+
         $comment = new Comment(array(
            'ticket_id'=>$request->get('ticket_id'),
-           'content'=>$request->get('content'),
+           'content'=>$content,
            'user_id'=>Auth::user()->id,
         ));
         $comment->save();
 
-        if(Auth::user()->role == 1){
+        if(Auth::user()->user_role == 1){
             $status ='Pending';
         }else{
             $status ='Answered';
@@ -34,7 +39,7 @@ class CommentsController extends Controller
         $details = [
             'msg'=>'A new reply has been added to ticket #'.$ticketSlug,
             'replyOwnerId'=>Auth::user()->id,
-            'avatar'=>$ticketOwner->avatar,
+            'avatar'=>Auth::user()->avatar,
             'ticketSlug'=>$ticketSlug,
             'time'=>$ticketTime,
 

@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Http\Request;
 use App\Http\Requests\TicketFormRequest;
 use App\Ticket;
@@ -77,18 +77,18 @@ class TicketsController extends Controller
         $ticket->save();
 
         //Send mail to user
-        $data = array (
-            'name'=>Auth::user()->name,
-            'title'=>'A new Ticket Created',
-            'msg'=>'A new Ticket #'.$slug.' Has been created',
-            'slug'=>$slug,
-        );
+        // $data = array (
+        //     'name'=>Auth::user()->name,
+        //     'title'=>'A new Ticket Created',
+        //     'msg'=>'A new Ticket #'.$slug.' Has been created',
+        //     'slug'=>$slug,
+        // );
 
-        Mail::send('emails.ticketCreate', $data, function ($message) use($slug){
-            $message->from('no-reply@sonbl.com', 'Ticket System');
-            $message->to(Auth::user()->email, 'Hossam');
-            $message->subject('New Ticket Created '. $slug);
-        });
+        // Mail::send('emails.ticketCreate', $data, function ($message) use($slug){
+        //     $message->from('no-reply@sonbl.com', 'Ticket System');
+        //     $message->to(Auth::user()->email, 'Hossam');
+        //     $message->subject('New Ticket Created '. $slug);
+        // });
 
 
         return redirect('/tickets/create')->with('status',[
@@ -106,9 +106,14 @@ class TicketsController extends Controller
      */
     public function show($slug)
     {
-        $ticket = Ticket::whereSlug($slug)->whereUser_id(Auth::user()->id)->firstOrFail();
-        $comments = $ticket->comments()->get();
-        return view ('tickets.view',compact('ticket','comments'));
+        $ticket = Ticket::whereSlug($slug)->firstOrFail();
+
+        if(Gate::allows('ticket-view',$ticket->user_id)){
+            $comments = $ticket->comments()->get();
+            return view ('tickets.view',compact('ticket','comments'));
+        }
+        return view('tickets.notAuthorized');
+
     }
 
     public function close($slug){
@@ -123,7 +128,11 @@ class TicketsController extends Controller
     public function edit($slug)
     {
         $ticket = Ticket::whereSlug($slug)->firstOrFail();
-        return view('tickets.edit',compact('ticket'));
+        if($ticket->user_id == Auth::user()->id){
+            return view('tickets.edit',compact('ticket'));
+        }else{
+            return redirect(route('notauthorized'));
+        }
     }
 
     /**
@@ -139,15 +148,14 @@ class TicketsController extends Controller
 
         $ticket->title = $request->get('title');
         $ticket->content = $request->get('content');
-
-        if($request->get('status') !=null){
-            $ticket->status = 0;
+        if($request->get('closed') !=null){
+            $ticket->status = 'Closed';
         }else{
-            $ticket->status = 1;
+            $ticket->status = 'Pending';
         }
 
         $ticket->save();
-        return redirect(action('TicketsController@edit',$slug))->with('status','The ticket '.$slug.' has been updated');
+        return redirect(route('view_ticket',$slug))->with('status','The ticket '.$slug.' has been updated');
 
     }
 

@@ -17,7 +17,7 @@ class CheckAdmin
     public function handle($request, Closure $next)
     {
         if(Gate::denies('admin-dash')){
-            return redirect('home');
+            return redirect(route('notauthorized'));
         }
         return $next($request);
     }

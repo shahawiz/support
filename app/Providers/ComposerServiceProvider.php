@@ -23,6 +23,7 @@ class ComposerServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        view()->composer('tickets.notifications', 'App\Http\ViewComposers\NotificationComposer');
+
+
     }
 }

@@ -1,5 +1,7 @@
 @extends('layouts.app')
 @section('title', 'View All '.$pageName.' Tickets')
+<script src='https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.0/bootstrap-table.min.js'></script>
+
 @section('content')
 
 
@@ -29,7 +31,10 @@
                 @else
                 <input type="text" class="form-control" id="myInput" onkeyup="myFunction()" placeholder="Search for tickets..">
 
-                    <table class="table table-striped" id="ticketsList" >
+                    <table class="table table-hover" id="ticketsList" data-show-header="true" data-pagination="true"
+                    data-id-field="name"
+                    data-page-list="[5, 10, 25, 50, 100, ALL]"
+                    data-page-size="5" >
                         <thead>
                         <tr>
                             <th>ID</th>
@@ -42,7 +47,7 @@
 
                         </tr>
                         </thead>
-                        <tbody>
+                        <tbody id="myTable">
                         @foreach($tickets as $ticket)
                         <tr class="{{$ticket->status === "Answered" ? "Answered":""}}">
                                 <td>#{{ $ticket->id }} </td>
@@ -65,11 +70,11 @@
                                     {{$ticket->department->title}}
                                 </td>
                                 <td>
-                                    {{$ticket->updated_at->diffForHumans()}}
+                                    <small>{{$ticket->updated_at->diffForHumans()}}</small>
                                 </td>
                                 <td>
                                     @if($ticket->comments->last()['user_id'])
-                                    {{getUserName($ticket->comments->last()['user_id'])}}
+                                    <h6>{{getUserName($ticket->comments->last()['user_id'])}}</h6>
 
                                     @endif
                                 </td>
@@ -78,33 +83,15 @@
                         @endforeach
                         </tbody>
                     </table>
+                    <div class="col-md-12 text-center">
+                        <ul class="pagination pager" id="myPager"></ul>
+                        </div>
+
                 @endif
             </div>
         </div>
     </div>
-    <script>
-        function myFunction() {
-          // Declare variables
-          var input, filter, table, tr, td, i, txtValue;
-          input = document.getElementById("myInput");
-          filter = input.value.toUpperCase();
-          table = document.getElementById("ticketsList");
-          tr = table.getElementsByTagName("tr");
-
-          // Loop through all table rows, and hide those who don't match the search query
-          for (i = 0; i < tr.length; i++) {
-            td = tr[i].getElementsByTagName("td")[1];
-            if (td) {
-              txtValue = td.textContent || td.innerText;
-              if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                tr[i].style.display = "";
-              } else {
-                tr[i].style.display = "none";
-              }
-            }
-          }
-        }
-        </script>
+<script src="{{asset('js/tickets_utiles.js')}}"></script>
 @endsection
 
 

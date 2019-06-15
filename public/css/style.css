@@ -172,7 +172,8 @@ a:hover{
     border-radius: 5px;
     padding: 4px;
     font-weight: bold;
-    width: 85%;
+    width: 60%;
+    font-size: small;
     text-align: center;
 }
 .status-solved{
@@ -229,4 +230,29 @@ a:hover{
     border: 1px solid #e2e2e2;
     padding: 2px;
     transition : .2s;
+}
+.solved_ticket{
+    /* text-transform: uppercase; */
+    font-style: italic;
+    font-weight: bold;
+    color: #65a41a;
+    margin: 15px;
+}
+.solved_hr{
+    border-color: #00800094;
+}
+.closed_ticket{
+    /* text-transform: uppercase; */
+    font-style: italic;
+    font-weight: bold;
+    color: #e3342f;
+    margin: 15px;
+}
+.closed_hr{
+    border-color: #e3342f;
+}
+.page-item.active .page-link {
+    color: #fff !important;
+    background-color: #676767a6 !important;
+    border-color: #ffffff !important;
 }

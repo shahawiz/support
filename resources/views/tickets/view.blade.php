@@ -9,12 +9,18 @@
 <div class="row">
 <div class="col-md-9 text-left">        <h3 class=""><i class="fas fa-ticket-alt"></i> {{ $ticket->title }}</h3><br>
 </div>
-
+<link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote-lite.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote-lite.js"></script>
 <div class="col-md-3">
 <div class="btn-group">
+    @if(Auth::user()->user_role == 2 || Auth::user()->user_role == 3)
+    @if($ticket->status != 'Solved')
+    <a href="{{ route('mark_as_solved',$ticket->slug)}}" class="btn btn-success">Mark as Solved</a>
+    @endif
+    @endif
+    @if(count($comments) < 1 && $ticket->user_id == Auth::user()->id)
     <a href="{{ action('TicketsController@edit',$ticket->slug)}}" class="btn btn-primary">Edit Ticket</a>
-    <a href="{{ action('TicketsController@close',$ticket->slug)}}" class="btn btn-success">Mark as Solved</a>
-
+    @endif
 </div>
 
 </div>
@@ -102,26 +108,32 @@
                                 <img src="{{asset('images/avatars/'.$comment->user->avatar)}}" width="35" alt="Profile Avatar" title="{{$comment->user->name}}" />
                                 </a>
 
-                            <p >{{$comment->content}}</p>
+                            <p >{!! $comment->content !!}</p>
 
                             </li>
                            @endforeach
 
-
-
-
-
                         </ul>
+                        @if($ticket->status == 'Solved')
+                        <div class="d-flex">
+                            <hr class="my-auto flex-grow-1 solved_hr">
+                            <h5 class="solved_ticket">Solved Ticket</h5>
+                            <hr class="my-auto flex-grow-1 solved_hr">
+                        </div>
+                        @elseif($ticket->status == 'Closed')
+                        <div class="d-flex">
+                            <hr class="my-auto flex-grow-1 closed_hr">
+                            <h5 class="closed_ticket">Closed Ticket</h5>
+                            <hr class="my-auto flex-grow-1 closed_hr">
+                        </div>
 
-
-
-
-
-
-
-
-
-<hr/>
+                        @else
+            <!-- Reply Section Start -->
+            <div class="d-flex">
+                <hr class="my-auto flex-grow-1">
+                <h5 class="text-bold">Reply This Ticket</h5>
+                <hr class="my-auto flex-grow-1">
+            </div>
 
             <!-- the comment box -->
             <div class="write-new">
@@ -137,20 +149,36 @@
 
                 @endforeach
 
-                <h4><i class="fa fa-paper-plane-o"></i> Leave a reply:</h4>
                 <form role="form" action="/comment" method="POST">
                 <input type="hidden" name="ticket_id" value="{{$ticket->id}}" />
                 @csrf
                     <div class="form-group">
-                        <textarea class="form-control" name="content" rows="6"></textarea>
+                        <textarea class="form-control" id="summernote" name="content" rows="4"></textarea>
                     </div>
                     <button type="submit" name="say" value="" class="btn btn-primary"><i class="fa fa-reply"></i> Add Reply</button>
                 </form>
             </div>
+            <!-- Add Reply Section End -->
+                        @endif
+
 
 </div>
 
 </div>
 </div>
+<script>
+    $('#summernote').summernote({
 
+      placeholder: 'Feel free to ask us any question',
+      tabsize: 2,
+      height: 250,
+      toolbar: [
+        ['font', ['bold', 'underline']],
+        ['color', ['color']],
+        ['insert', ['link', 'picture', 'video']],
+        ['view', ['fullscreen']],
+    ],
+    });
+
+  </script>
 @endsection

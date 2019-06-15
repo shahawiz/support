@@ -2,6 +2,8 @@
 @section('title', 'Edit ticket')
 
 @section('content')
+<link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote-lite.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote-lite.js"></script>
     <div class="container col-md-8 col-md-offset-2">
         <div class="card mt-5">
             <div class="card-header ">
@@ -29,13 +31,13 @@
                         <div class="form-group">
                             <label for="content" class="col-lg-12 control-label">Content</label>
                             <div class="col-lg-12">
-                                <textarea class="form-control" rows="3" id="content" name="content">{{ $ticket->content }}</textarea>
+                                <textarea class="form-control" id="summernote" rows="3" id="content" name="content">{{ $ticket->content }}</textarea>
                                 <span class="help-block">Feel free to ask us any question.</span>
                             </div>
                         </div>
                         <div class="form-group">
                             <label>
-                                <input type="checkbox" name="status" {{ $ticket->status?"":"checked"}} > Close this ticket?
+                                <input type="checkbox" name="closed" {{ $ticket->status == 'Closed' ? "checked":""}} > Close this ticket?
                             </label>
                         </div>
                         <div class="form-group">
@@ -50,5 +52,21 @@
                 </form>
             </div>
         </div>
+        <script>
+                $('#summernote').summernote({
+
+                  placeholder: 'Feel free to ask us any question',
+                  tabsize: 2,
+                  height: 300,
+                  toolbar: [
+                    ['font', ['bold', 'underline']],
+                    ['color', ['color']],
+                    ['insert', ['link', 'picture', 'video']],
+                    ['view', ['fullscreen', 'help']],
+                ],
+                });
+
+              </script>
     </div>
+
 @endsection

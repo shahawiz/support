@@ -18,7 +18,7 @@ class CreateTicketsTable extends Migration
             $table->string('title',255);
             $table->text('content');
             $table->string('slug')->nullable();
-            $table->enum('status', ['Pending','Answered','Solved']);
+            $table->enum('status', ['Pending','Answered','Solved','Closed']);
             $table->integer('user_id')->nullable();
             $table->integer('department_id');
             $table->enum('priority', ['Low','Normal','High','Very High']);
